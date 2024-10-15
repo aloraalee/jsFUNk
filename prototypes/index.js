@@ -26,6 +26,12 @@ const kittyPrompts = {
 
         /* CODE GOES HERE */
 
+
+        // I want just the kitties that have a color of orange - FILTER.
+        // because filter return the data as it comes then we will need another
+        // method to go with this we will want to use map in addition to filter
+        // because we need to 'transform' the object to only return the names info
+        // in an array.  
     // Annotation:
     // Write your annotation here as a comment
   },
