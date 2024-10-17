@@ -24,25 +24,42 @@ const kittyPrompts = {
     // Return an array of just the names of kitties who are orange e.g.
         // ['Tiger', 'Snickers']
 
-        /* CODE GOES HERE */
-
-
+    var orangeKitties = kitties.filter((kitty) => {
+      return kitty.color === "orange"
+    })
+    var orangeKittyNames = orangeKitties.map ((kitty) => {
+      return kitty.name
+    }) 
+    return orangeKittyNames
+  
         // I want just the kitties that have a color of orange - FILTER.
         // because filter return the data as it comes then we will need another
         // method to go with this we will want to use map in addition to filter
         // because we need to 'transform' the object to only return the names info
         // in an array.  
     // Annotation:
-    // Write your annotation here as a comment
+    // Because we are given an array and I want just the names of orange cats, 
+    // then using filter first to find just the orange cats and then using map to 
+    // create a new array of the orange cat names makes the most sense to me. 
+    // On each iteration of filter it uses the criteria of color: orange to include
+    // that kitty object in the new array. Then each iteration of map goes through an
+    // instance of the orange kitty and pulls out only their name information to add it 
+    // to the new array. 
   },
 
   sortByAge() {
     // Sort the kitties by their age
+    kitties.sort((a, b) =>
+      b.age - a.age )
+    return (kitties)
 
-    /* CODE GOES HERE */
-
+    // I know I need to return all of the kitties in the array, so the length is not 
+    // changing. What is changing is the order the cats are in the array. I want the 
+    //oldest cat to be at index 0 and so on. I will sort by age to do this. 
     // Annotation:
-    // Write your annotation here as a comment
+    // The word 'sort' is in the function name, so this feels obvious I would use sort.
+    // I know I need to sort by age and so kitties.age is how I pull that info from the 
+    // object
   },
 
   growUp() {
@@ -60,7 +77,9 @@ const kittyPrompts = {
     // ...etc]
 
     /* CODE GOES HERE */
+       // Annotation: Map makes the most sense because we need to r
   }
+
 };
 
 // PLEASE READ-----------------------
