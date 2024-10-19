@@ -20,17 +20,17 @@ const { dinosaurs, humans, movies } = require('./datasets/dinosaurs');
 
 // DATASET: kitties from ./datasets/kitties
 const kittyPrompts = {
-  orangePetNames() {
+  orangePetNames(animals) {
     // Return an array of just the names of kitties who are orange e.g.
         // ['Tiger', 'Snickers']
 
-    var orangeKitties = kitties.filter((kitty) => {
-      return kitty.color === "orange"
+    var orangeAnimals = animals.filter((animal) => {
+      return animal.color === "orange"
     })
-    var orangeKittyNames = orangeKitties.map ((kitty) => {
-      return kitty.name
+    var orangeAnimalNames = orangeAnimals.map ((animal) => {
+      return animal.name
     }) 
-    return orangeKittyNames
+    return orangeAnimalNames
   
         // I want just the kitties that have a color of orange - FILTER.
         // because filter return the data as it comes then we will need another
@@ -47,11 +47,11 @@ const kittyPrompts = {
     // to the new array. 
   },
 
-  sortByAge() {
+  sortByAge(animals) {
     // Sort the kitties by their age
-    kitties.sort((a, b) =>
+    animals.sort((a, b) =>
       b.age - a.age )
-    return (kitties)
+    return (animals)
 
     // I know I need to return all of the kitties in the array, so the length is not 
     // changing. What is changing is the order the cats are in the array. I want the 
@@ -62,7 +62,7 @@ const kittyPrompts = {
     // object
   },
 
-  growUp() {
+  growUp(animals) {
     // Return an array of kitties who have all grown up by 2 years e.g.
     // [{
     //   name: 'Felicia',
@@ -76,11 +76,37 @@ const kittyPrompts = {
     // },
     // ...etc]
 
-    /* CODE GOES HERE */
+    // Pseudo Code: I want to return a nested hash in an array. This nested hash is 
+    // the same length as the original array (4 elements). Since the age needs to incease
+    // by two I will use map() because I want a new array and I will have to transform
+    // the age information. I will need to grab the age age each iteration increase it by two
+    // so all kitties aged by 2 years. 
+
+      var agedTwoYears = animals.map((animal)=> {
+        return {
+          ...animal,
+          age: animal.age + 2
+        }
+      })
+      return agedTwoYears
+
+
+
+      // var agedTwoYears = kitties.map((kitty) => {
+      //   return { 
+      //     name: kitty.name,
+      //     age: kitty.age += 2,
+      //     color: kitty.color
+      //   };
+      // });
+      // return agedTwoYears
+
        // Annotation: Map makes the most sense because we need to r
   }
 
 };
+
+// USING SPREAD: 
 
 // PLEASE READ-----------------------
 // Currently, your functions are probably using the `kitties` global import variable.
