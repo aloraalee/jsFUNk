@@ -82,31 +82,31 @@ const kittyPrompts = {
     // the age information. I will need to grab the age age each iteration increase it by two
     // so all kitties aged by 2 years. 
 
-      var agedTwoYears = animals.map((animal)=> {
-        return {
-          ...animal,
-          age: animal.age + 2
-        }
-      })
+      var agedTwoYears = animals.map((animal) => {
+        return { 
+          name: animal.name,
+          age: animal.age += 2,
+          color: animal.color
+        };
+      });
       return agedTwoYears
 
-
-
-      // var agedTwoYears = kitties.map((kitty) => {
-      //   return { 
-      //     name: kitty.name,
-      //     age: kitty.age += 2,
-      //     color: kitty.color
-      //   };
-      // });
-      // return agedTwoYears
-
-       // Annotation: Map makes the most sense because we need to r
+       // Annotation: Map makes the most sense because we need to transform the data to 
+       // add two years to the age and we want to return a new array with all the 
+       // information in the old array, but with the age changed.
   }
 
 };
 
 // USING SPREAD: 
+
+// var agedTwoYears = animals.map((animal)=> {
+//   return {
+//     ...animal,
+//     age: animal.age + 2
+//   }
+// })
+// return agedTwoYears
 
 // PLEASE READ-----------------------
 // Currently, your functions are probably using the `kitties` global import variable.
@@ -128,8 +128,19 @@ const kittyPrompts = {
 
 // DATASET: clubs from ./datasets/clubs
 const clubPrompts = {
-  membersBelongingToClubs() {
-    // Your function should access the clubs data through a parameter (it is being passed as an argument in the test file)
+  membersBelongingToClubs(clubs) {
+    // const clubs = [
+    //   { club: 'Drama', members: ['Louisa', 'Pam', 'Nathaniel' ] },
+    //   { club: 'Band', members: ['Leta', 'Robbie', 'Jhun', 'Will'] },
+    //   { club: 'Chess', members: ['David', 'Pam', 'Brittany', 'Robbie'] },
+    //   { club: 'Newspaper', members: ['Pam', 'David', 'Brittany', 'Christie', 'Leta'] },
+    //   { club: 'Astronomy', members: ['Nathaniel', 'Leta'] },
+    //   { club: 'FBLA', members: ['Christie', 'David', 'Robbie'] },
+    //   { club: 'Art', members: ['Jhun', 'Louisa'] }
+    // ];
+
+    // Your function should access the clubs data through a parameter 
+    // (it is being passed as an argument in the test file)
     // Create an object whose keys are the names of people, and whose values are
     // arrays that include the names of the clubs that person is a part of. e.g.
     // {
@@ -138,13 +149,43 @@ const clubPrompts = {
     //   ...etc
     // }
 
-    /* CODE GOES HERE */
+    // pseudo code:
+    // I want to return a hash where the key is a name of a member and the value is
+    // an array of clubs that they are members to. 
+    // The name will come from iterating through the array to access the values of the 
+    // members key, but I need to access the values one at a time. It is important to
+    // note that these names repeat because they are members of multiple clubs.
+    // Next I will have to take those names and make them keys that do not repeat
+    // The values to those name keys will be the clubs that they are members to, 
+    // so to access that data I will need to iterate through each club and if the name
+    // matches the key then the club can be added as a value to the array of clubs
+
+
+    // const clubObj = clubs.map((club) => {
+    //   const members = club.members
+
+    //   const singleMember = members.reduce((acc, member) => {
+    //     console.log('acc', acc)
+    //     console.log('member', member)
+
+    //     // if (!acc[member]) {
+    //     //   acc[member] = []
+    //     // }
+    //     // console.log('acc', acc)
+    //     // console.log('member', member)
+    //   }, {})
+
+
+    // })
+
+
+
+
 
     // Annotation:
     // Write your annotation here as a comment
   }
 };
-
 
 
 
@@ -173,10 +214,35 @@ const modPrompts = {
     //   { mod: 4, studentsPerInstructor: 8 }
     // ]
 
-    /* CODE GOES HERE */
+    const result = mods.map((mod) => {
+      // console.log('mod.mod:', mod.mod)
+      // console.log('students:', mod.students)
+      // console.log('instructors:', mod.instructors)
+      const studentsPerInstructor = mod.students / mod.instructors
+      // console.log('students per instructor:', studentsPerInstructor)
+        return { 
+          mod: mod.mod,
+          studentsPerInstructor: studentsPerInstructor,
+        };
+    })
+    return result
+
+    /* Pseudo Code:
+    I start with an array of mod objects. I also want to end with an array of 
+    mod objects. Mathematically, I need to create a new key called studentsPerInstuctor
+    which equals mods.students divided by mods.instructors. I will need to transform
+    my data to return only the mod: and the studentsPerInstructor:. I think using
+    map will be the most efficient because I need to return two existing key value pairs
+    from the current array. 
+    */
 
     // Annotation:
-    // Write your annotation here as a comment
+    /* I used map here because I wanted to return a new array that was the same 
+    length as the given array. I knew that I needed to transform the data so that
+    I could calculate the students per instructor and then return only two key-value 
+    pairs and so I could return an object and write in the key and use dot notation
+    to get to the mod number, the students and the instructors. 
+    */
   }
 };
 
