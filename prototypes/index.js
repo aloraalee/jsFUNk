@@ -189,15 +189,11 @@ const clubPrompts = {
 
 
 
-
-
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-
-
 
 
 
@@ -248,17 +244,11 @@ const modPrompts = {
 
 
 
-
-
-
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-
-
-
 
 
 
@@ -273,10 +263,23 @@ const cakePrompts = {
     //    ..etc
     // ]
 
-    /* CODE GOES HERE */
+
+    let result = cakes.map((cake) => {
+      // console.log(cake.cakeFlavor)
+      return {
+        flavor: cake.cakeFlavor,
+        inStock: cake.inStock
+      };    
+    })
+    return result
+
+
 
     // Annotation:
-    // Write your annotation here as a comment
+    /* I knew that I would need to return an array of objects that were the same length as the original array. 
+    Since the new array needed to only return two of the key-value pairs, it needed to be transformed, so map 
+    made the msot sense. Using dot notation lets you access the values in the array.  
+    */
   },
 
   onlyInStock() {
@@ -300,20 +303,35 @@ const cakePrompts = {
     // ..etc
     // ]
 
-    /* CODE GOES HERE */
+
+    return cakes.filter((cake) => {
+      return cake.inStock > 0
+    })
+
 
     // Annotation:
-    // Write your annotation here as a comment
+    /* I only wanted to return the object if the cake was in stock, so I needed to filter by inStock > 0. It was 
+    also clear because the array that was returned was two objects less than the original array. 
+    */
   },
 
   totalInventory() {
     // Return the total amount of cakes in stock e.g.
     // 59
 
-    /* CODE GOES HERE */
+
+    let result = cakes.reduce((acc, cake) => {
+      // console.log('acc', acc)
+      // console.log('cake', cake.inStock)
+      return acc + cake.inStock
+    }, 0)
+    return result
 
     // Annotation:
-    // Write your annotation here as a comment
+    /* Since 59 is a single value, I knew I wanted to use reduce. What I needed to access
+    was the cake.inStock and since the values were being added together then I could use 
+    acc + cake.inStock to create a sum.  
+    */
   },
 
   allToppings() {
@@ -321,7 +339,19 @@ const cakePrompts = {
     // every cake in the dataset e.g.
     // ['dutch process cocoa', 'toasted sugar', 'smoked sea salt', 'berries', ..etc]
 
-    /* CODE GOES HERE */
+    /* Pseudo Code:
+    1. I need to return an array of topings with no duplicated. An array is one single item, so
+    I can use reduce to add items if they are unique to an array. I will start the initial value
+    to be an array.
+    2. I need to access topings using cake.toppings. I need the topings to be singular strings
+    instead of an array
+    */
+
+  //   var result = cakes.map((cake) => {
+  //     var toppings = cake.toppings
+  //     console.log('toppings', toppings)
+
+  // })
 
     // Annotation:
     // Write your annotation here as a comment
