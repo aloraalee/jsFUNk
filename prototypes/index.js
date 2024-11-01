@@ -347,11 +347,19 @@ const cakePrompts = {
     instead of an array
     */
 
-  //   var result = cakes.map((cake) => {
-  //     var toppings = cake.toppings
-  //     console.log('toppings', toppings)
+    const uniqueToppings = cakes.reduce((acc, cake) => {
+      const singleCakeToppings = cake.toppings
+      singleCakeToppings.forEach(topping => {
+        if (!acc.includes(topping)) {
+          acc.push(topping);
+        }
+      });
+      return acc;
+    }, []);
+  
+    return uniqueToppings;
+  
 
-  // })
 
     // Annotation:
     // Write your annotation here as a comment
@@ -368,10 +376,35 @@ const cakePrompts = {
     //    ...etc
     // }
 
+    /*
+    Pseudo Code:
+    1. I am starting with an array of objects and I need to return an object
+    In the object the key is the topping and the value is the number of the toppings needed. 
+    2. I can use the code I already wrote because it returns the a unique array of each topping. 
+    3. Instead of shoving the topping into an array I want it to be the key of the object
+    and to start with a value of 1, but count up everytime the topping is found in the iteration
+    I do. 
+    */
+
     /* CODE GOES HERE */
 
+    const toppingCount = cakes.reduce((acc, cake) => {
+      const singleCakeToppings = cake.toppings
+      singleCakeToppings.forEach(topping => {
+        if (!acc[topping]) {
+          acc[topping] = 0
+        }
+        acc[topping] += 1
+      });
+      return acc;
+    }, {});
+  
+    return toppingCount;
+
     // Annotation:
-    // Write your annotation here as a comment
+    // It made sense to use reduce because I needed to return one single object
+    // and the object value needed to count up as the topings were iterated and multiple 
+    // of the same value were found. 
   }
 };
 
