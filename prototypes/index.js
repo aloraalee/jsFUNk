@@ -435,7 +435,19 @@ const classPrompts = {
     //   { roomLetter: 'G', program: 'FE', capacity: 29 }
     // ]
 
+/* 
+    Pseudo Code:
+    1. I think that using filter makes sense here because I am starting
+    with an array and returning an array, but I only want to return 
+    an array if the program == 'FE'
+*/
+
     /* CODE GOES HERE */
+
+    const frontEnd = classrooms.filter((classroom) => {
+      return classroom.program == 'FE'
+    })
+    return frontEnd
 
     // Annotation:
     // Write your annotation here as a comment
@@ -449,16 +461,34 @@ const classPrompts = {
     //   beCapacity: 96
     // }
 
-    /* CODE GOES HERE */
+    /* Pseudo Code
+    1. It makes sence to use reduce here because I want to start with an array and return one object
+    2. I will have to use conditional logic if program == 'FE' make key and accumulate capacity
+    and I will have to do the same for the BE
+    */
 
+    const capacityByProgram = classrooms.reduce((acc, classroom) =>{
+      if (!acc[`${classroom.program.toLowerCase()}Capacity`]) {
+        acc[`${classroom.program.toLowerCase()}Capacity`] = 0
+      }
+      acc[`${classroom.program.toLowerCase()}Capacity`] += classroom.capacity
+      return acc
+    }, {})
+    return capacityByProgram
     // Annotation:
-    // Write your annotation here as a comment
+    // Reduce made sense because I wanted to return a single object and I wanted 
+    // to sum up the capacity as reduce iterated through. 
   },
 
   sortByCapacity() {
     // Return the array of classrooms sorted by their capacity (least capacity to greatest)
 
     /* CODE GOES HERE */
+
+    var sortedArray = classrooms.sort((a,b) =>
+      a.capacity - b.capacity
+    )
+    return sortedArray
 
     // Annotation:
     // Write your annotation here as a comment
