@@ -321,7 +321,7 @@ describe("PROTOTYPES", () => {
   });
 
   describe("Book prompts", () => {
-    it.skip("removeViolence", () => {
+    it("removeViolence", () => {
       const e = bookPrompts.removeViolence(books);
 
       expect(e).to.deep.equal(['1984',
@@ -340,7 +340,7 @@ describe("PROTOTYPES", () => {
         'Treasure Island'])
     });
 
-    it.skip("getNewBooks", () => {
+    it("getNewBooks", () => {
       const e = bookPrompts.getNewBooks(books);
 
       expect(e).to.deep.equal([{

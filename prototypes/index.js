@@ -504,8 +504,9 @@ const classPrompts = {
 // DATASET: books from './datasets/books
 
 const bookPrompts = {
-  removeViolence() {
-    // Your function should access the books data through a parameter (it is being passed as an argument in the test file)
+  removeViolence(books) {
+    // Your function should access the books data through a parameter (it is being passed as 
+    // an argument in the test file)
     // return an array of all book titles that are not horror or true crime. Eg:
 
     //  ['1984', 'The Great Gatsby', 'Lord of the Flies', 'Harry Potter and the Sorcerer\'s Stone',
@@ -515,13 +516,28 @@ const bookPrompts = {
     //   'Catch-22', 'Treasure Island']
 
 
-    /* CODE GOES HERE */
+    /* Pseudo Code
+    1. I start with an array of book objects and I want to return an array of only the titles.
+    2. Since I want only the titles. I am going to use map (reduce would also work) 
+    3. Conditional logic needs to be used here for !genre == 'horor' || !genre == 'true crime'
+    4. I need to acccess the title of the books. books.title should work
+     */
+
+    notHorrorNorCrime = []
+
+    books.forEach((book) => {
+      if(book.genre !== 'Horror' && book.genre !== 'True Crime') {
+        notHorrorNorCrime.push(book.title)
+      }  
+    })
+    return notHorrorNorCrime
 
     // Annotation:
-    // Write your annotation here as a comment
-
+    // Map does not work in this example because we do not want to return an array of the same length.
+    // Since the horror, and true crime books are being excluded our array will have fewer elements,
+    // This means filter and map or forEach or reduce would work, but not map alone. 
   },
-  getNewBooks() {
+  getNewBooks(books) {
     // return an array of objects containing all books that were
     // published in the 90's and 00's. Inlucde the title and the year Eg:
 
@@ -529,7 +545,24 @@ const bookPrompts = {
     //  { title: 'Life of Pi', year: 2001 },
     //  { title: 'The Curious Incident of the Dog in the Night-Time', year: 2003 }]
 
-    /* CODE GOES HERE */
+    /* Pseudo Code
+    1. I start with an array and I end with an array of the same length because it contains
+    all books. 
+    2. I want to transform the array to contain objects where the key is the title and the other
+    is the year
+    3. map should work for this 
+     */
+
+    const ninetiesAndTwoThousands = books.filter((book) => {
+      return book.published >= 1990
+    })
+    const result = ninetiesAndTwoThousands.map((book) => {
+      return { 
+        title: book.title,
+        year: book.published
+      };
+    })
+    return result
 
     // Annotation:
     // Write your annotation here as a comment
@@ -567,7 +600,10 @@ const weatherPrompts = {
     // return an array of all the average temperatures. Eg:
     // [ 40, 40, 44.5, 43.5, 57, 35, 65.5, 62, 14, 46.5 ]
 
-    /* CODE GOES HERE */
+    /* Pseudo Code
+    1. I am starting off with an array and I am returning an array
+    2. I need to access both high and low temperatures and put them in an array 
+     */
 
     // Annotation:
     // Write your annotation here as a comment
