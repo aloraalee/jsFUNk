@@ -565,7 +565,10 @@ const bookPrompts = {
     return result
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I thought that I could simply use map with some conditional statements, but I couldn't because I was mistaken when
+    // I first read it. I actually did not want to return ALL books I wanted to return all books from the 90s and 00s. 
+    // After realizing this I decided that filter needed to happen before I could do map. Year and published tripped me up
+    // for a minute, so it is important to look at the data closely. 
   },
 
   getBooksByYear(books, year) {
@@ -578,10 +581,24 @@ const bookPrompts = {
     //  { title: 'Life of Pi', year: 2001 },
     //  { title: 'The Curious Incident of the Dog in the Night-Time', year: 2003 }]
 
-    /* CODE GOES HERE */
+    /* Pseudo Code
+    1. I think that I can reuse a lot of the logic, but this time I need to take in a parameter that will be
+    the year and make sure that where necessary I am using bracket notation.  
+     */
+
+    const booksByYear = books.filter((book) => {
+      return book.published >= year
+    })
+    const result = booksByYear.map((book) => {
+      return { 
+        title: book.title,
+        year: book.published
+      };
+    })
+    return result
 
     // Annotation:
-    // Write your annotation here as a comment
+    // It was basically the same code, but I replaced 1990 with year and changed my year to a string. 
   }
 
 };
@@ -603,10 +620,23 @@ const weatherPrompts = {
     /* Pseudo Code
     1. I am starting off with an array and I am returning an array
     2. I need to access both high and low temperatures and put them in an array 
+    3. Since each object has a high and a low temperature I am not returning an array of the same length,
+    so map will not be my best option, at least not right away. 
+    4. I think reduce will work best because it can accumulate the temperatures and add them to an array
      */
 
+    const highAndLowTemps = weather.reduce((acc, cityWeather) => {
+      averageTemps = (cityWeather.temperature.high + cityWeather.temperature.low) / 2 
+
+      acc.push(averageTemps)
+      return acc
+    },[])
+      return highAndLowTemps 
+
     // Annotation:
-    // Write your annotation here as a comment
+    // At first I did not realize that the values in the getAverageTemps function were actually averages.
+    // I overlooked this and I pushed in both the high and the low values using reduce. It was a simple fix 
+    // once I realized it. 
   },
 
   findSunnySpots() {
@@ -616,10 +646,29 @@ const weatherPrompts = {
     // 'New Orleans, Louisiana is sunny.',
     // 'Raleigh, North Carolina is mostly sunny.' ]
 
-    /* CODE GOES HERE */
+    /* Pseudo Code
+    1. I am starting with an array and ending with an array of locations where the weather type is 'sunny' 
+    or 'mostly sunny'. Because of this I think that filter is a good option to access the sunny weather locations
+    2. After I have used filter I can use forEach or reduce or map to write an interpolated statement with the 
+    // weather.location and weather.type
+     */
+
+      const sunnyLocations = weather.filter((cityWeather) => {
+        return cityWeather.type == 'sunny'  || cityWeather.type == 'mostly sunny'
+      })
+      const result = sunnyLocations.map((cityWeather) => {
+        return `${cityWeather.location} is ${cityWeather.type}.`
+      })
+      return result
+
 
     // Annotation:
-    // Write your annotation here as a comment
+    // What I am realizing is that I can almost always use filter + map, forEach or reduce interchangeably 
+    // if I am writting my code in a way that makes sense to me and I am accounting for the type of data
+    // that I need to return such as an integer, array or object and if the data I am returning is altered
+    // and if it is the same length as the original array or not. 
+    // I'm also realizing that I am paying more attention to whether or not I am starting with an array, 
+    // and if not how to get the data to match an array so I can use a prototype method on it. 
   },
 
   findHighestHumidity() {
