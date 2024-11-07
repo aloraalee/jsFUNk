@@ -680,7 +680,19 @@ const weatherPrompts = {
     //   temperature: { high: 49, low: 38 }
     // }
 
-    /* CODE GOES HERE */
+    /* 
+    Pseudo Code:
+    1. I start with an array of objects and I want to return a single object that has the highest humidity. 
+    2. I am not changing the returned object, it has everything the original has.
+    3. Since I need to return the 'highest' humidity I am thinking that using a sort and then [0]
+    will be a good option since JS does not have .first
+    4. Set up .sort()
+    5. Sort by desc because you want the highest first
+    */
+
+    let sortByHumidity = weather.sort((a, b) => 
+      b.humidity - a.humidity)
+    return sortByHumidity[0]
 
     // Annotation:
     // Write your annotation here as a comment
@@ -1058,11 +1070,40 @@ const astronomyPrompts = {
 const ultimaPrompts = {
   totalDamage() {
 
-    // Return the sum of the amount of damage for all the weapons that our characters can use.  Even though the same weapon might be used by multiple characters, count each weapon only once.
-    // Solve this *without* using Object.keys().  Hint: iterate over the characters array, then iterate through each character's weapons array. Find a way to make sure you only count each weapon once. 
+    // Return the sum of the amount of damage for all the weapons that our characters can use.  
+    //Even though the same weapon might be used by multiple characters, count each weapon only once.
+    // Solve this *without* using Object.keys().  
+    // Hint: iterate over the characters array, then iterate through each character's weapons array. 
+    // Find a way to make sure you only count each weapon once. 
     // Answer => 59
 
-    /* CODE GOES HERE */
+    /* Pseudo Code
+    1. I want to look at each character object, one at a time.
+    AVATAR - while I'm looking at avatar, I want to iterate through its weaspons array and look at 
+    each weapon one at a time
+    2. Create a new array that hold each weapon string with no duplicates. If the weapon already exists, 
+    then skip,if not add it to the array. 
+    3. MAGEBANE - I want to go into the weapons object and access the magebane key to get the 
+      damage property to get the number 9 
+    4. weapon > magebane > damage >>>>> 9 
+    5. With the number 9 I want to set it equal to the acc to get a total. I want to add all of the damage
+    to get to 59. 
+    6. While doing this I have to make sure there are no duplicates 
+     */
+    
+      const weaponsArray = characters.reduce((acc, character) => {
+        character.weapons.forEach((weapon) =>{
+          if (acc.includes(weapon) == false) {
+            acc.push(weapon)
+        }
+        })  
+        return acc
+      }, [])
+      const total = weaponsArray.reduce((acc, uniqueWeapon) => {
+      acc += weapons[uniqueWeapon].damage
+        return acc
+      }, 0)
+      return total
 
     // Annotation:
     // Write your annotation here as a comment
@@ -1073,7 +1114,47 @@ const ultimaPrompts = {
     // Return the sum damage and total range for each character as an object.
     // ex: [ { Avatar: { damage: 27, range: 24 }, { Iolo: {...}, ...}
 
-    /* CODE GOES HERE */
+    /* 
+    Pseudo Code:
+    1. I can see that I am starting with two different arrays. I will want to use the code from total
+    damage to use the single weapon at a time because I need to access the damage and range info.
+    2. I do need to add up the total damage and the total range. 
+    3. I need the key of the new array to be the character.name 
+    */
+
+    // const weaponsArray = characters.reduce((acc, character) => {
+    //   character.weapons.forEach((weapon) =>{
+    //     if (acc.includes(weapon) == false) {
+    //       acc.push(weapon)
+    //   }
+    //   })  
+    //   return acc
+    // }, [])
+    // const totalDamage = weaponsArray.reduce((acc, uniqueWeapon) => {
+    // acc += weapons[uniqueWeapon].damage
+    //   return acc
+    // }, 0)
+
+    // const totalRange = weaponsArray.reduce((acc, uniqueWeapon) => {
+    //   acc += weapons[uniqueWeapon].range
+    //     return acc
+    //   }, 0)
+
+    // const characterDamageAndRange = characters.map((singleCharacter) => {
+    //   console.log('single character name', singleCharacter.name)
+    //   console.log('damage', weapons[uniqueWeapon])
+    //   const characterName = singleCharacter.name
+    //   return {
+    //     characterName: {
+    //       'damage': singleCharacter.damage,
+    //       'range': singleCharacter.range
+    //     }
+    //   }
+    // })
+
+    // return characterDamageAndRange
+
+
 
     // Annotation:
     // Write your annotation here as a comment
